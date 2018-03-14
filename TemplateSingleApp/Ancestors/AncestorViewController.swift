@@ -8,9 +8,15 @@
 
 import UIKit
 import RxSwift
+import EventKit
+import CoreLocation
 
-class AncestorViewController: UIViewController {
+class AncestorViewController: UIViewController, CLLocationManagerDelegate {
     
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    private var observers = [NSObjectProtocol]()
+    private var geolocalisation : Geolocalisation?
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
     var activityIndicator : OSLActivityIndicatorView?
@@ -22,6 +28,27 @@ class AncestorViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.activateLocation()
+        
+        //  Add an event observer to receive personnal event
+        let notificationCenter = NotificationCenter.default
+        let mainQueue = OperationQueue.main
+        
+        self.observers.append( notificationCenter.addObserver(forName: NSNotification.Name(rawValue: ObserversName.applicationDidEnterBackground.rawValue), object: nil, queue: mainQueue)
+        {
+            [unowned self] _ in
+            
+            self.applicationDidEnterBackground()
+        })
+        
+        self.observers.append( notificationCenter.addObserver(forName: NSNotification.Name(rawValue: ObserversName.applicationDidBecomeActive.rawValue), object: nil, queue: mainQueue)
+        {
+            [unowned self] _ in
+            
+            self.applicationDidBecomeActive()
+        })
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,9 +56,57 @@ class AncestorViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    //  Good citizen...
     deinit {
         
-        //self.unregisterGesturesRecognizers()
+        for observer in self.observers {
+            
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    //  MARK: - To override
+
+    //  Called when App become back active
+    @objc func applicationDidBecomeActive() {
+        
+    }
+
+    //  Called when App enter background
+    @objc func applicationDidEnterBackground() {
+        
+    }
+
+    @objc func pullRefreshControl(_ sender:AnyObject?) {
+        
+        //  OVERRIDE ME
+    }
+
+    func locationUpdated(cityName:String, cityCoordinate: String) {
+        
+        print("cityName:\(cityName), cityCoordinate: \(cityCoordinate)")
+    }
+    
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    ///    Functions to mamange the delegate for CLLocationManagerDelegate
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        self.geolocalisation?.locationManager(manager, didFailWithError: error as NSError)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        self.geolocalisation?.locationManager(manager, didUpdateLocations: locations)
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager,  didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        self.geolocalisation?.locationManager(manager, didChangeAuthorizationStatus: status)
     }
 
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,11 +127,6 @@ class AncestorViewController: UIViewController {
                 
             }
         }
-    }
-
-    @objc func pullRefreshControl(_ sender:AnyObject?) {
-        
-        //  OVERRIDE ME
     }
 
     func delay(delay: Double, closure: @escaping () -> ()) {
@@ -82,6 +152,16 @@ class AncestorViewController: UIViewController {
         }
     }
     
+    func activateLocation() {
+        
+            self.geolocalisation = Geolocalisation(view: self, delegate: self, notificationHandler: {
+                
+                [unowned self ] cityName, cityCoordinate  in
+                
+                self.locationUpdated(cityName:cityName, cityCoordinate: cityCoordinate)
+            })
+    }
+
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -143,6 +223,49 @@ class AncestorViewController: UIViewController {
             present(activityController, animated: true, completion: nil)
         }
     }
+    
+    /**
+     Add a new event in the iOS calendar
+     */
+    func addCalendar(event schoolEvent: CustomEventKit, completionHandler: @escaping( (Bool) -> Void ) ) {
+        
+        let eventStore : EKEventStore = EKEventStore()
+        
+        eventStore.requestAccess(to: .event) {
+            
+            (granted, error) in
+            
+            if (granted) && (error == nil) {
+                
+                let ekEvent = EKEvent(eventStore: eventStore)
+                
+                ekEvent.title = schoolEvent.title
+                ekEvent.startDate = schoolEvent.dateStart
+                ekEvent.endDate = schoolEvent.dateEnd
+                ekEvent.notes = schoolEvent.notes
+                ekEvent.calendar = eventStore.defaultCalendarForNewEvents
+                
+                if let address = schoolEvent.address {
+                    
+                    ekEvent.structuredLocation = EKStructuredLocation()
+                    ekEvent.structuredLocation?.title = address.cityName + ", " + address.streetAddress
+                }
+                
+                do {
+                    try eventStore.save(ekEvent, span: .thisEvent, commit: true)
+                    completionHandler(true)
+                }
+                catch {
+                    completionHandler(false)
+                }
+            }
+            else {
+                
+                completionHandler(false)
+            }
+        }
+    }
+
 }
 
 

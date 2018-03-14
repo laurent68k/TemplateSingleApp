@@ -23,11 +23,6 @@ extension Double {
 
 public class Geolocalisation {
     
-    private enum ObserversName : String {
-        
-        case kApplicationDidEnterBackground = "applicationDidEnterBackground"
-        case kApplicationDidBecomeActive = "applicationDidBecomeActive"
-    }
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
     public var locManager: CLLocationManager!
     private var geocoder: CLGeocoder!
@@ -54,13 +49,13 @@ public class Geolocalisation {
         let notificationCenter = NotificationCenter.default
         let mainQueue = OperationQueue.main
         
-        self.observers.append( notificationCenter.addObserver(forName: NSNotification.Name(rawValue: ObserversName.kApplicationDidEnterBackground.rawValue), object: nil, queue: mainQueue)
+        self.observers.append( notificationCenter.addObserver(forName: NSNotification.Name(rawValue: ObserversName.applicationDidEnterBackground.rawValue), object: nil, queue: mainQueue)
         {
             [unowned self] _ in
             self.locManager.stopUpdatingLocation()
         })
         
-        self.observers.append( notificationCenter.addObserver(forName: NSNotification.Name(rawValue: ObserversName.kApplicationDidBecomeActive.rawValue), object: nil, queue: mainQueue)
+        self.observers.append( notificationCenter.addObserver(forName: NSNotification.Name(rawValue: ObserversName.applicationDidBecomeActive.rawValue), object: nil, queue: mainQueue)
         {
             [unowned self] _ in
             self.locManager.startUpdatingLocation()

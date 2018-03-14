@@ -17,6 +17,7 @@ class MainViewController: AncestorViewController {
     @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageViewApple: UIImageView!
+    @IBOutlet weak var localisationLabel: UILabel!
     //---------------------------------------------------------------------------------------------------------------------------------------------
     static let kApplicationDidBecomeActive = "applicationDidBecomeActive"
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,6 +90,30 @@ class MainViewController: AncestorViewController {
 
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    
+    //  Called when App become back active
+    override func applicationDidBecomeActive() {
+        
+    }
+    
+    //  Called when App enter background
+    override func applicationDidEnterBackground() {
+        
+    }
+    
+    override func pullRefreshControl(_ sender: AnyObject?) {
+        
+        self.refresh()
+    }
+
+    override func locationUpdated(cityName:String, cityCoordinate: String) {
+        
+        self.localisationLabel.text = "\(cityName), \(cityCoordinate)"
+    }
+
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
     //  MARK: - RxObservers
     private func addRxObservers() {
         
@@ -137,16 +162,6 @@ class MainViewController: AncestorViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         })
-    }
-    
-    override func pullRefreshControl(_ sender: AnyObject?) {
-        
-        self.refresh()
-    }
-    
-    //  Called when App become back active
-    @objc private func applicationDidBecomeActive() {
-        
     }
     
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -208,7 +223,7 @@ class MainViewController: AncestorViewController {
         
     }
 
-    @IBAction func shareItemAction(_ sender: UIButton) {
+    @IBAction func shareItemAction(_ sender: UIBarButtonItem) {
         
         if let image = self.imageViewApple.image {
          
@@ -216,5 +231,28 @@ class MainViewController: AncestorViewController {
         }
     }
     
+    @IBAction func eventKitAction(_ sender: UIBarButtonItem) {
+        
+        let customEventKit = CustomEventKit()
+        
+        customEventKit.dateStart = Date()
+        customEventKit.dateEnd = Date().addingTimeInterval(TimeInterval(60))
+        customEventKit.title = "Example of event"
+        
+        self.addCalendar(event: customEventKit) {
+            
+            (success) in
+            
+            let message = ( success ? "Event.Added" : "Event.Failed" )
+            
+            //  Alert the user
+            let alert  = UIAlertController(title: "Calendar".asLocalizable, message: message.asLocalizable, preferredStyle: .alert)
+            
+            alert.addAction( UIAlertAction(title: "OK".asLocalizable, style: .default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+
+        }
+    }
 }
 
