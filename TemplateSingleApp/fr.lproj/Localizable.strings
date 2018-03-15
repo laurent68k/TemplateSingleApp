@@ -8,11 +8,13 @@
 
 "MainViewController.NetworkIssue"="Erreur réseau";
 "MainViewController.NetworkIssue.Message"="Impossible de se connecter, le réseau ou le serveur rencontre des problèmes";
-"MainViewController.Alert.OK"="OK";
-"MainViewController.Calendar"="Calendrier";
-"MainViewController.Event.Added"="Evénement ajouté";
-"MainViewController.Event.Failed"="Impossible d'ajouter l'événement";
 "TableViewController.Calendar"="Calendrier";
 "TableViewController.Share"="Partager";
-"Network.Issue"="Erreur réseau";
-"Network.ErrorMessage"="Impossible de se connecter, le réseau ou le serveur rencontre des problèmes";
+"AlertController.OK"="OK";
+"AlertController.Network.Issue"="Erreur réseau";
+"AlertController.Network.ErrorMessage"="Impossible de se connecter, le réseau ou le serveur rencontre des problèmes";
+"AlertController.Calendar"="Calendrier";
+"AlertController.Event.Added"="Evénement ajouté";
+"AlertController.Event.Failed"="Impossible d'ajouter l'événement";
+"AlertController.Camera.Title.Error"="Caméra erreur";
+"AlertController.Camera.NoCamera"="Votre appareil ne dispose pas de caméra";

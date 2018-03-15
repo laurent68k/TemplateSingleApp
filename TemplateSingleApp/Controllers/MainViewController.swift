@@ -19,6 +19,7 @@ class MainViewController: AncestorViewController {
     @IBOutlet weak var imageViewApple: UIImageView!
     @IBOutlet weak var localisationLabel: UILabel!
     @IBOutlet weak var itunesLabel: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
     //---------------------------------------------------------------------------------------------------------------------------------------------
     static let kApplicationDidBecomeActive = "applicationDidBecomeActive"
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,6 +109,11 @@ class MainViewController: AncestorViewController {
         self.refresh()
     }
 
+    override func imageCaptured(image: UIImage) {
+    
+        self.photoImageView.image = image
+    }
+    
     override func locationUpdated(cityName:String, cityCoordinate: String) {
         
         self.viewModel.upateLocation(cityName:cityName, cityCoordinate: cityCoordinate)
@@ -174,7 +180,7 @@ class MainViewController: AncestorViewController {
             
             if !success {
                 //  Alert the user
-                let alert  = UIAlertController(title: "Network.Issue".asLocalizable, message: "Network.ErrorMessage".asLocalizable, preferredStyle: .alert)
+                let alert  = UIAlertController(title: "AlertController.Network.Issue".asLocalizable, message: "AlertController.Network.ErrorMessage".asLocalizable, preferredStyle: .alert)
                 
                 alert.addAction( UIAlertAction(title: "OK".asLocalizable, style: .default, handler: nil))
                 
@@ -255,6 +261,11 @@ class MainViewController: AncestorViewController {
         }
     }
     
+    @IBAction func cameraAction(_ sender: UIBarButtonItem) {
+        
+        self.shootPhoto()
+    }
+    
     @IBAction func eventKitAction(_ sender: UIBarButtonItem) {
         
         let customEventKit = CustomEventKit()
@@ -267,12 +278,12 @@ class MainViewController: AncestorViewController {
             
             (success) in
             
-            let message = ( success ? "MainViewController.Event.Added" : "MainViewController.Event.Failed" )
+            let message = ( success ? "AlertController" : "AlertController" )
             
             //  Alert the user
-            let alert  = UIAlertController(title: "MainViewController.Calendar".asLocalizable, message: message.asLocalizable, preferredStyle: .alert)
+            let alert  = UIAlertController(title: "AlertController".asLocalizable, message: message.asLocalizable, preferredStyle: .alert)
             
-            alert.addAction( UIAlertAction(title: "MainViewController.Alert.OK".asLocalizable, style: .default, handler: nil))
+            alert.addAction( UIAlertAction(title: "AlertController.OK".asLocalizable, style: .default, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
 

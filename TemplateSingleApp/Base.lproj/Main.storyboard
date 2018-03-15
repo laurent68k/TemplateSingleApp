@@ -78,9 +78,17 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kh1-aS-Vs3">
+                                                <rect key="frame" x="128" y="322" width="64" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="64" id="9kR-wk-LXH"/>
+                                                    <constraint firstAttribute="height" constant="64" id="RIy-j3-n9z"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="kh1-aS-Vs3" firstAttribute="top" secondItem="8z9-2r-TrT" secondAttribute="bottom" constant="8" id="7F3-tM-2aZ"/>
                                             <constraint firstItem="axE-F8-ZxI" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="9D3-ux-z1B"/>
                                             <constraint firstItem="5RD-8i-z38" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="CBk-v6-e9m"/>
                                             <constraint firstItem="9IG-IG-8Lc" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="DDm-Fs-dWb"/>
@@ -91,6 +99,7 @@
                                             <constraint firstItem="5RD-8i-z38" firstAttribute="top" secondItem="axE-F8-ZxI" secondAttribute="bottom" constant="16" id="cW9-OH-sf9"/>
                                             <constraint firstItem="8z9-2r-TrT" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="czw-ug-Zia"/>
                                             <constraint firstItem="9IG-IG-8Lc" firstAttribute="centerY" secondItem="7Ij-KB-ooW" secondAttribute="centerY" id="fON-DK-Usl"/>
+                                            <constraint firstItem="kh1-aS-Vs3" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="oGe-p3-r6T"/>
                                             <constraint firstItem="axE-F8-ZxI" firstAttribute="top" secondItem="7Ij-KB-ooW" secondAttribute="top" constant="55" id="uv5-n9-mSy"/>
                                         </constraints>
                                     </view>
@@ -114,6 +123,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem image="settings" id="Uyd-Ev-8Bq"/>
+                                    <barButtonItem systemItem="camera" id="Ict-qL-gPD">
+                                        <connections>
+                                            <action selector="cameraAction:" destination="BYZ-38-t0r" id="4Sx-bu-cFH"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Mc8-1D-4fM"/>
                                     <barButtonItem systemItem="organize" id="G3L-3V-nnc">
                                         <connections>
@@ -147,6 +161,7 @@
                         <outlet property="itunesLabel" destination="RZB-eC-B2p" id="1bP-JC-78u"/>
                         <outlet property="localisationLabel" destination="9IG-IG-8Lc" id="ke0-xr-oj9"/>
                         <outlet property="mainScrollView" destination="Lyq-Uv-cuR" id="LGQ-5g-WSQ"/>
+                        <outlet property="photoImageView" destination="kh1-aS-Vs3" id="51Y-gg-i5Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

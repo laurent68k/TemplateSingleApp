@@ -11,7 +11,7 @@ import RxSwift
 import EventKit
 import CoreLocation
 
-class AncestorViewController: UIViewController, CLLocationManagerDelegate {
+class AncestorViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,14 +72,21 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate {
     //  Called when App become back active
     @objc func applicationDidBecomeActive() {
         
+        //  OVERRIDE ME
     }
 
     //  Called when App enter background
     @objc func applicationDidEnterBackground() {
         
+        //  OVERRIDE ME
     }
 
     @objc func pullRefreshControl(_ sender:AnyObject?) {
+        
+        //  OVERRIDE ME
+    }
+
+    func imageCaptured(image:UIImage) {
         
         //  OVERRIDE ME
     }
@@ -203,12 +210,10 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate {
         if let imageData = UIImageJPEGRepresentation(image, 1.0) {
 
             let data : [Any] = ["Text to share", imageData]
-            let activityController = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+            let activityController = UIActivityViewController(activityItems: data, applicationActivities: nil)
     
             activityController.excludedActivityTypes = [UIActivityType.postToFacebook,
-                                                        UIActivityType.postToTwitter,
                                                         UIActivityType.postToWeibo,
-                                                        UIActivityType.print,
                                                         UIActivityType.assignToContact,
                                                         UIActivityType.addToReadingList,
                                                         UIActivityType.postToFlickr,
@@ -222,6 +227,47 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate {
         
             present(activityController, animated: true, completion: nil)
         }
+    }
+    
+    /**
+     Handle the photo shoot
+     */
+    func shootPhoto() {
+        
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.allowsEditing = true
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        else {
+            
+            let alert  = UIAlertController(title: "AlertController.Camera.Title.Error".asLocalizable, message: "AlertController.Camera.NoCamera".asLocalizable, preferredStyle: .alert)
+            alert.addAction( UIAlertAction(title: "AlertController.OK".asLocalizable, style: .default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            
+            self.imageCaptured(image: editedImage)
+        }
+        
+        //Dismiss the UIImagePicker after selection
+        picker.dismiss(animated: true, completion: nil )
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        picker.dismiss(animated: true, completion: nil)
     }
     
     /**
@@ -267,7 +313,6 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate {
     }
 
 }
-
 
 extension AncestorViewController: UIPopoverPresentationControllerDelegate {
     

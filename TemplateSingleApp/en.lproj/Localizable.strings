@@ -8,11 +8,13 @@
 
 "MainViewController.NetworkIssue"="Network issue";
 "MainViewController.NetworkIssue.Message"="Unable to connect to the server, network or server encountered a problem";
-"MainViewController.Alert.OK"="OK";
-"MainViewController.Calendar"="Calendar";
-"MainViewController.Event.Added"="Event added";
-"MainViewController.Event.Failed"="Event add failed";
 "TableViewController.Calendar"="Calendar";
 "TableViewController.Share"="Share";
-"Network.Issue"="Network issue";
-"Network.ErrorMessage"="Unable to connect to the server, network or server encountered a problem";
+"AlertController.OK"="OK";
+"AlertController.Network.Issue"="Network issue";
+"AlertController.Network.ErrorMessage"="Unable to connect to the server, network or server encountered a problem";
+"AlertController.Calendar"="Calendar";
+"AlertController.Event.Added"="Event added";
+"AlertController.Event.Failed"="Event add failed";
+"AlertController.Camera.Title.Error"="No camera";
+"AlertController.Camera.NoCamera"="Your device doesn't have any camera";
