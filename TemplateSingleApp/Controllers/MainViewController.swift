@@ -18,6 +18,7 @@ class MainViewController: AncestorViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageViewApple: UIImageView!
     @IBOutlet weak var localisationLabel: UILabel!
+    @IBOutlet weak var itunesLabel: UILabel!
     //---------------------------------------------------------------------------------------------------------------------------------------------
     static let kApplicationDidBecomeActive = "applicationDidBecomeActive"
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,7 +110,7 @@ class MainViewController: AncestorViewController {
 
     override func locationUpdated(cityName:String, cityCoordinate: String) {
         
-        self.localisationLabel.text = "\(cityName), \(cityCoordinate)"
+        self.viewModel.upateLocation(cityName:cityName, cityCoordinate: cityCoordinate)
     }
 
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,14 +118,32 @@ class MainViewController: AncestorViewController {
     //  MARK: - RxObservers
     private func addRxObservers() {
         
-//        self.viewModel?.variablehere.asObservable().subscribe(onNext: {
+//        self.viewModel?.gpsCityName.asObservable().subscribe(onNext: {
 //
-//            variablehere in
+//            gpsCityName in
 //
-//            self.refresh(withMiddleIndicator:true)
+//            if !gpsCityName.isEmpty {
 //
+//                self.refresh(withMiddleIndicator:true)
+//            }
 //        } ).disposed(by: self.disposeBag)
-        
+
+        self.viewModel.jsonNetwork.asObservable().subscribe(onNext: {
+
+            jsonNetwork in
+
+            self.displayInformations(jsonNetwork:jsonNetwork)
+
+        } ).disposed(by: self.disposeBag)
+
+        self.viewModel.isGpsValid.asObservable().subscribe( {
+            
+            _ in
+            
+            self.localisationLabel.text = "\(String(describing: self.viewModel.gpsCityName.value)), \(String(describing: self.viewModel.cityCoordinate.value))"
+            
+        } ).disposed(by: self.disposeBag)
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.applicationDidBecomeActive),
@@ -162,6 +181,11 @@ class MainViewController: AncestorViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         })
+    }
+    
+    private func displayInformations(jsonNetwork:JSonNetwork?) {
+        
+        self.itunesLabel.text = jsonNetwork?.results[0].artistName
     }
     
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -236,19 +260,19 @@ class MainViewController: AncestorViewController {
         let customEventKit = CustomEventKit()
         
         customEventKit.dateStart = Date()
-        customEventKit.dateEnd = Date().addingTimeInterval(TimeInterval(60))
+        customEventKit.dateEnd = Date().addingTimeInterval(TimeInterval(3600))
         customEventKit.title = "Example of event"
         
         self.addCalendar(event: customEventKit) {
             
             (success) in
             
-            let message = ( success ? "Event.Added" : "Event.Failed" )
+            let message = ( success ? "MainViewController.Event.Added" : "MainViewController.Event.Failed" )
             
             //  Alert the user
-            let alert  = UIAlertController(title: "Calendar".asLocalizable, message: message.asLocalizable, preferredStyle: .alert)
+            let alert  = UIAlertController(title: "MainViewController.Calendar".asLocalizable, message: message.asLocalizable, preferredStyle: .alert)
             
-            alert.addAction( UIAlertAction(title: "OK".asLocalizable, style: .default, handler: nil))
+            alert.addAction( UIAlertAction(title: "MainViewController.Alert.OK".asLocalizable, style: .default, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
 

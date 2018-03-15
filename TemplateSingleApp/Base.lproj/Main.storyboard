@@ -72,13 +72,21 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZB-eC-B2p">
+                                                <rect key="frame" x="139" y="276.5" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="axE-F8-ZxI" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="9D3-ux-z1B"/>
                                             <constraint firstItem="5RD-8i-z38" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="CBk-v6-e9m"/>
                                             <constraint firstItem="9IG-IG-8Lc" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="DDm-Fs-dWb"/>
+                                            <constraint firstItem="RZB-eC-B2p" firstAttribute="top" secondItem="9IG-IG-8Lc" secondAttribute="bottom" constant="16" id="IXb-nJ-7GO"/>
                                             <constraint firstItem="8z9-2r-TrT" firstAttribute="centerY" secondItem="7Ij-KB-ooW" secondAttribute="centerY" id="KcG-eW-UWy"/>
+                                            <constraint firstItem="RZB-eC-B2p" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="PDf-gQ-mk6"/>
                                             <constraint firstAttribute="height" constant="500" id="bMN-a8-UBm"/>
                                             <constraint firstItem="5RD-8i-z38" firstAttribute="top" secondItem="axE-F8-ZxI" secondAttribute="bottom" constant="16" id="cW9-OH-sf9"/>
                                             <constraint firstItem="8z9-2r-TrT" firstAttribute="centerX" secondItem="7Ij-KB-ooW" secondAttribute="centerX" id="czw-ug-Zia"/>
@@ -136,6 +144,7 @@
                     <connections>
                         <outlet property="containerView" destination="7Ij-KB-ooW" id="wXM-Mi-y00"/>
                         <outlet property="imageViewApple" destination="8z9-2r-TrT" id="hfu-3g-TvB"/>
+                        <outlet property="itunesLabel" destination="RZB-eC-B2p" id="1bP-JC-78u"/>
                         <outlet property="localisationLabel" destination="9IG-IG-8Lc" id="ke0-xr-oj9"/>
                         <outlet property="mainScrollView" destination="Lyq-Uv-cuR" id="LGQ-5g-WSQ"/>
                     </connections>

@@ -177,7 +177,7 @@ class TableViewController: AncestorViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let calendarAction = UITableViewRowAction(style: .normal, title: "MainViewController.Calendar".asLocalizable, handler: {
+        let calendarAction = UITableViewRowAction(style: .normal, title: "TableViewViewController.Calendar".asLocalizable, handler: {
                 
             action, indexPath in
             
@@ -193,7 +193,7 @@ class TableViewController: AncestorViewController, UITableViewDelegate, UITableV
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-        let shareAction = UIContextualAction(style: .normal, title:  "MainViewController.Share".asLocalizable, handler: {
+        let shareAction = UIContextualAction(style: .normal, title:  "TableViewViewController.Share".asLocalizable, handler: {
 
             (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 

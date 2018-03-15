@@ -154,12 +154,12 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate {
     
     func activateLocation() {
         
-            self.geolocalisation = Geolocalisation(view: self, delegate: self, notificationHandler: {
-                
-                [unowned self ] cityName, cityCoordinate  in
-                
-                self.locationUpdated(cityName:cityName, cityCoordinate: cityCoordinate)
-            })
+        self.geolocalisation = Geolocalisation(view: self, delegate: self, notificationHandler: {
+            
+            [unowned self ] cityName, cityCoordinate  in
+            
+            self.locationUpdated(cityName:cityName, cityCoordinate: cityCoordinate)
+        })
     }
 
     /// ---------------------------------------------------------------------------------------------------------------------------------------------

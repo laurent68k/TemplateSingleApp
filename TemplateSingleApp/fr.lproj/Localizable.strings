@@ -1,0 +1,18 @@
+/*
+  Localizable.strings
+  TemplateSingleApp
+
+  Created by Laurent Favard on 15/03/2018.
+  Copyright © 2018 Laurent Favard. All rights reserved.
+*/
+
+"MainViewController.NetworkIssue"="Erreur réseau";
+"MainViewController.NetworkIssue.Message"="Impossible de se connecter, le réseau ou le serveur rencontre des problèmes";
+"MainViewController.Alert.OK"="OK";
+"MainViewController.Calendar"="Calendrier";
+"MainViewController.Event.Added"="Evénement ajouté";
+"MainViewController.Event.Failed"="Impossible d'ajouter l'événement";
+"TableViewController.Calendar"="Calendrier";
+"TableViewController.Share"="Partager";
+"Network.Issue"="Erreur réseau";
+"Network.ErrorMessage"="Impossible de se connecter, le réseau ou le serveur rencontre des problèmes";

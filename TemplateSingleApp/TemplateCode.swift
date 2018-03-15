@@ -1,8 +1,7 @@
 //
 //  TemplateCode.swift
-//  Meteo Kids
 //
-//  Created by Laurent Favard on 15/01/2018.
+//  Created by Laurent Favard on 15/03/2018.
 //  Copyright © 2018 Laurent68k. All rights reserved.
 //
 

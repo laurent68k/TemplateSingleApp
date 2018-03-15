@@ -8,7 +8,7 @@
 
 import Foundation
 
-class JSonExample : Codable {
+class JSonResourcesDefault : Codable {
     
     var items = [String]()
 }

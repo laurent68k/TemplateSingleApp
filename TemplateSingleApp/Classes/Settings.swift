@@ -22,9 +22,9 @@ class Settings {
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     Read from the user settings the JSonExample data or from the default App's JSon
+     Read from the user settings the JSonResourcesDefault data or from the default App's JSon
     */
-    class func jsonFromUserDefaults() -> JSonExample {
+    class func jsonFromUserDefaults() -> JSonResourcesDefault {
     
         let jsonDecoder = JSONDecoder()
         let data = UserDefaults.standard.data(forKey: Settings.kResourcesDefault)
@@ -32,7 +32,7 @@ class Settings {
         //  try to read the cities list from user settings
         if let data = data {
             
-            let jsonExample = try? jsonDecoder.decode( JSonExample.self, from: data)
+            let jsonExample = try? jsonDecoder.decode( JSonResourcesDefault.self, from: data)
             
             if let jsonExample = jsonExample {
                 
@@ -46,7 +46,7 @@ class Settings {
             let data = try? Data(contentsOf: URL(fileURLWithPath: filepath) )
             if let data = data {
                 
-                let jsonExample = try? jsonDecoder.decode( JSonExample.self, from: data)
+                let jsonExample = try? jsonDecoder.decode( JSonResourcesDefault.self, from: data)
                 
                 if let jsonExample = jsonExample {
                     
@@ -55,13 +55,13 @@ class Settings {
             }
         }
         
-        return JSonExample()
+        return JSonResourcesDefault()
     }
     
     /**
-     Save the user JSonExample data
+     Save the user JSonResourcesDefault data
      */
-    class func saveJsonUserDefaults(jsonExample:JSonExample?) {
+    class func saveJsonUserDefaults(jsonExample:JSonResourcesDefault?) {
         
         if let jsonExample = jsonExample {
             
@@ -79,7 +79,7 @@ class Settings {
     /// functions to save/load any file content in sandbox
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
 
-    class func loadFromSandbox(inDocumentName: String ) -> JSonExample {
+    class func loadFromSandbox(inDocumentName: String ) -> JSonResourcesDefault {
         
         var documentDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
         documentDirectory?.appendPathComponent(inDocumentName)
@@ -90,7 +90,7 @@ class Settings {
             let file = try? Data(contentsOf: documentDirectory )
             if let file = file {
                 let jsonDecoder = JSONDecoder()
-                let jsonExample = try? jsonDecoder.decode(JSonExample.self, from:file)
+                let jsonExample = try? jsonDecoder.decode(JSonResourcesDefault.self, from:file)
                 
                 if let jsonExample = jsonExample, jsonExample.items.count > 0 {
                     
@@ -99,10 +99,10 @@ class Settings {
                 }
             }
         }
-        return JSonExample()
+        return JSonResourcesDefault()
     }
     
-    class func saveInSandbox( inDocumentName: String, jsonExample:JSonExample ) {
+    class func saveInSandbox( inDocumentName: String, jsonExample:JSonResourcesDefault ) {
         
         var documentDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
         documentDirectory?.appendPathComponent(inDocumentName)
