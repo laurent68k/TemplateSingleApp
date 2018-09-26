@@ -6,15 +6,10 @@ target 'TemplateSingleApp' do
   use_frameworks!
 
   # Pods for TemplateSingleAp
-  pod 'RxSwift',   '~> 4.1'
-  pod 'RxCocoa',   '~> 4.1'
-  pod 'Alamofire', '~> 4.6'
+  pod 'RxSwift',   '~> 4.0'
+  pod 'RxCocoa',   '~> 4.0'
+  pod 'Alamofire', '~> 4.0'
   pod 'Spring',    '~> 1.0'
-
-  target 'TemplateSingleAppTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end
 
@@ -25,6 +20,6 @@ target 'TemplateSingleAppExtension' do
     
     #inherit! :search_paths
     # Pods for Little Météo Extension
-    pod 'RxSwift',   '~> 4.1'
-    pod 'Alamofire', '~> 4.6'
+    pod 'RxSwift',   '~> 4.0'
+    pod 'Alamofire', '~> 4.0'
 end

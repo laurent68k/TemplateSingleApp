@@ -168,9 +168,9 @@ class TableViewController: AncestorViewController, UITableViewDelegate, UITableV
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
     /// ---------------------------------------------------------------------------------------------------------------------------------------------
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         
-        return UITableViewCellEditingStyle.none
+        return UITableViewCell.EditingStyle.none
     }
     
     /// ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -29,13 +29,13 @@ class OSLActivityIndicatorView: UIView {
     /**
      Spinner style
      */
-    var activityIndicatorViewStyle : UIActivityIndicatorViewStyle {
+    var activityIndicatorViewStyle : UIActivityIndicatorView.Style {
         
         get {
-            return self.activityIndicator?.activityIndicatorViewStyle ?? UIActivityIndicatorViewStyle.whiteLarge
+            return self.activityIndicator?.style ?? UIActivityIndicatorView.Style.whiteLarge
         }
         set {
-            self.activityIndicator?.activityIndicatorViewStyle = newValue
+            self.activityIndicator?.style = newValue
         }
     }
     
@@ -130,20 +130,20 @@ class OSLActivityIndicatorView: UIView {
             if let activityIndicator = self.activityIndicator {
                 
                 //  Set my preferrences
-                activityIndicator.activityIndicatorViewStyle = .whiteLarge
+                activityIndicator.style = .whiteLarge
                 activityIndicator.hidesWhenStopped = true
                 activityIndicator.translatesAutoresizingMaskIntoConstraints = false
             
                 self.addSubview(activityIndicator)
                 
                 //  finally add the constraints for the UI
-                let horizontalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
+                let horizontalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
                 
-                let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
+                let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
 
-                let leftConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0)
+                let leftConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
 
-                let rightConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0)
+                let rightConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
 
                 self.addConstraint(horizontalConstraint)
                 self.addConstraint(verticalConstraint)

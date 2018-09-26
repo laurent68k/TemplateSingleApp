@@ -124,7 +124,7 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate, UIIma
         if let scrollView = scrollView {
             
             self.refreshControl.attributedTitle = NSAttributedString(string: NSLocalizedString("Loading...", comment: ""))
-            self.refreshControl.addTarget(self, action: #selector(self.pullRefreshControl(_:)), for: UIControlEvents.valueChanged)
+            self.refreshControl.addTarget(self, action: #selector(self.pullRefreshControl(_:)), for: UIControl.Event.valueChanged)
             
             if #available(iOS 10.0, *) {
                 scrollView.addSubview(self.refreshControl)
@@ -190,14 +190,14 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate, UIIma
                 viewParent.addSubview(activityIndicator)
                 
                 //  finally add the constraints for the UI
-                let horizontalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: viewParent, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+                let horizontalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: viewParent, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
                 
-                let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: viewParent, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+                let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: viewParent, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
                 
                 viewParent.addConstraint(horizontalConstraint)
                 viewParent.addConstraint(verticalConstraint)
                 
-                viewParent.bringSubview(toFront: activityIndicator)
+                viewParent.bringSubviewToFront(activityIndicator)
             }
         }
     }
@@ -207,18 +207,18 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate, UIIma
      */
     func shareData(_ sender:Any, image:UIImage) {
         
-        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+        if let imageData = image.jpegData(compressionQuality: 1.0) {
 
             let data : [Any] = ["Text to share", imageData]
             let activityController = UIActivityViewController(activityItems: data, applicationActivities: nil)
     
-            activityController.excludedActivityTypes = [UIActivityType.postToFacebook,
-                                                        UIActivityType.postToWeibo,
-                                                        UIActivityType.assignToContact,
-                                                        UIActivityType.addToReadingList,
-                                                        UIActivityType.postToFlickr,
-                                                        UIActivityType.postToVimeo,
-                                                        UIActivityType.postToTencentWeibo]
+            activityController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook,
+                                                        UIActivity.ActivityType.postToWeibo,
+                                                        UIActivity.ActivityType.assignToContact,
+                                                        UIActivity.ActivityType.addToReadingList,
+                                                        UIActivity.ActivityType.postToFlickr,
+                                                        UIActivity.ActivityType.postToVimeo,
+                                                        UIActivity.ActivityType.postToTencentWeibo]
         
             if let popoverPresentationController = activityController.popoverPresentationController {
                 
@@ -238,9 +238,9 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate, UIIma
         
         imagePicker.delegate = self
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
             imagePicker.allowsEditing = true
             
             self.present(imagePicker, animated: true, completion: nil)
@@ -254,9 +254,12 @@ class AncestorViewController: UIViewController, CLLocationManagerDelegate, UIIma
         }
     }
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let editedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
             
             self.imageCaptured(image: editedImage)
         }
@@ -332,4 +335,14 @@ extension AncestorViewController: UIPopoverPresentationControllerDelegate {
         
         super.prepare(for: segue, sender: sender)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

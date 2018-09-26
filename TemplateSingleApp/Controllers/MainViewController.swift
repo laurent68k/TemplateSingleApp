@@ -20,6 +20,10 @@ class MainViewController: AncestorViewController {
     @IBOutlet weak var localisationLabel: UILabel!
     @IBOutlet weak var itunesLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var infoBtnItem: UIBarButtonItem!
+    @IBOutlet weak var settingsBtnItem: UIBarButtonItem!
+    @IBOutlet weak var cameraBtnItem: UIBarButtonItem!
+    @IBOutlet weak var shareBtnItem: UIBarButtonItem!
     //---------------------------------------------------------------------------------------------------------------------------------------------
     static let kApplicationDidBecomeActive = "applicationDidBecomeActive"
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,6 +46,8 @@ class MainViewController: AncestorViewController {
     
         //  Initial Refresh data request
         self.refresh(withMiddleIndicator: true)
+        
+        self.customizeToolBarItems()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -117,6 +123,56 @@ class MainViewController: AncestorViewController {
     override func locationUpdated(cityName:String, cityCoordinate: String) {
         
         self.viewModel.upateLocation(cityName:cityName, cityCoordinate: cityCoordinate)
+    }
+
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+    /// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /*
+     TEST: ToolBar item with image and text
+     */
+    private func customizeToolBarItems() {
+        
+        //  Settings Item
+        let button =  UIButton(type: .custom)
+        button.setImage(UIImage(named: "info"), for: .normal)
+        button.frame = CGRect(x:0, y:0, width:50, height:30)
+        button.tintColor = UIColor.black
+        button.backgroundColor = UIColor.red
+        
+        let label = UILabel(frame: CGRect(x:3, y:20, width:47, height:20))
+        label.font = UIFont(name: "Arial-BoldMT", size: 10)
+        label.text = "About me"
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        label.backgroundColor =   UIColor.clear
+        button.addSubview(label)
+        //button.addTarget(self, action: #selector(self.settingsButtonAction), for: .touchUpInside)
+        self.infoBtnItem.customView = button
+        
+        //  Settings Item
+        let button2 = UIButton(type: .system)
+        button2.setImage(UIImage(named: "settings"), for: .normal)
+        button2.frame = CGRect(x:0, y:0, width:48, height:28)
+        button2.tintColor = UIColor.black
+        button2.backgroundColor = UIColor.green
+
+        let label2 = UILabel(frame: CGRect(x:3, y:20, width:47, height:20))
+        label2.font = UIFont(name: "Arial-BoldMT", size: 10)
+        label2.text = "Settings"
+        label2.textAlignment = .center
+        label2.textColor = UIColor.black
+        label2.backgroundColor =   UIColor.clear
+        button2.addSubview(label2)
+        //button2.addTarget(self, action: #selector(self.shareAppAction(_:)), for: .touchUpInside)
+        self.settingsBtnItem.customView = button2
+        
+        //  Settings Item
+        let button3 = UIButton(type: .system)
+
+        //button3.addTarget(self, action: #selector(self.infoButtonAction), for: .touchUpInside)
+//        self.shareBtnItem.customView = button3
+        
     }
 
     /// ---------------------------------------------------------------------------------------------------------------------------------------------

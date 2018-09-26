@@ -6,10 +6,17 @@ PODS:
   - Spring (1.0.5)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.6)
-  - RxCocoa (~> 4.1)
-  - RxSwift (~> 4.1)
+  - Alamofire (~> 4.0)
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
   - Spring (~> 1.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - RxCocoa
+    - RxSwift
+    - Spring
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
@@ -17,6 +24,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   Spring: 17901566c8ecf3a1327902b940406c64512f9bb1
 
-PODFILE CHECKSUM: d13dbbd04e68080549511924db00a4de22315855
+PODFILE CHECKSUM: 53df3fd60525dc0949f6559a2af07a7570ae1601
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.0

@@ -31,7 +31,6 @@
 		4D3A5239205A72F9002FB7D9 /* Requestor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A5238205A72F9002FB7D9 /* Requestor.swift */; };
 		4D3A523B205A7307002FB7D9 /* JsonRequestor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A523A205A7306002FB7D9 /* JsonRequestor.swift */; };
 		4D3A523D205A7628002FB7D9 /* JSonNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A523C205A7628002FB7D9 /* JSonNetwork.swift */; };
-		4D3A5243205A7E0A002FB7D9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D3A5245205A7E0A002FB7D9 /* Localizable.strings */; };
 		4D3A524B205A7E4D002FB7D9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D3A524D205A7E4D002FB7D9 /* Localizable.strings */; };
 		4D56B13E2058074000C557C2 /* OSLActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B13D2058074000C557C2 /* OSLActivityIndicatorView.swift */; };
 		4D56B1422058079E00C557C2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B1412058079E00C557C2 /* MainViewModel.swift */; };
@@ -344,7 +343,6 @@
 				4D11329F2057FEA2001A2560 /* Resources */,
 				4D1132ED2058019E001A2560 /* Embed App Extensions */,
 				01A4C95F7B7121A5A125DBA8 /* [CP] Embed Pods Frameworks */,
-				77B62BB75077A2F254C69048 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -364,7 +362,6 @@
 				4D1132D82058019E001A2560 /* Sources */,
 				4D1132D92058019E001A2560 /* Frameworks */,
 				4D1132DA2058019E001A2560 /* Resources */,
-				DC53EB0D329977F4584D2B9E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -387,10 +384,12 @@
 				TargetAttributes = {
 					4D1132A02057FEA2001A2560 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					4D1132DB2058019E001A2560 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -426,7 +425,6 @@
 				4DD72C9B20591B3F00C37499 /* CustomCollectionViewCell.xib in Resources */,
 				4D3A524B205A7E4D002FB7D9 /* Localizable.strings in Resources */,
 				4D1132AF2057FEA2001A2560 /* LaunchScreen.storyboard in Resources */,
-				4D3A5243205A7E0A002FB7D9 /* Localizable.strings in Resources */,
 				4D1132AC2057FEA2001A2560 /* Assets.xcassets in Resources */,
 				4D1132AA2057FEA2001A2560 /* Main.storyboard in Resources */,
 			);
@@ -485,21 +483,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		77B62BB75077A2F254C69048 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TemplateSingleApp/Pods-TemplateSingleApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AF27F2BFA887261A2148ADAC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -516,21 +499,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DC53EB0D329977F4584D2B9E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TemplateSingleAppExtension/Pods-TemplateSingleAppExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -766,7 +734,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.laurent68k.ios.TemplateSingleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -784,7 +752,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.laurent68k.ios.TemplateSingleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -801,7 +769,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laurent68k.ios.TemplateSingleApp.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -818,7 +786,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.laurent68k.ios.TemplateSingleApp.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
